@@ -26,5 +26,86 @@ public class Main {
     Продемонстрировать работу каждого из методов классов и вывести результат на консоль
     15. Залить код в репозиторий и отправить ссылку на репозиторий преподавателю
     */
+
+
+            // task (7.1 - 7.5) "абстрактный класс Vehicle"
+            abstract class Vehicle {
+                protected final int wheelCount; //7.3
+
+                Vehicle ( int wheelCount) {
+                    this.wheelCount = wheelCount;
+                } // 7.4 "Конструктор"
+                abstract protected void printInfo(); //7.5 "Абстрактный метод"
+            } // abstract Class Vehicle
+
+            // task (7.12) "Интерфейс Costable"
+            interface Costable {
+                int getCost();
+            } //Costable
+
+
+            // task (7.6 - 7.8) "Класс Car (наследник класса Vehicle)"
+            class Car extends Vehicle implements Costable {
+                private final int doorsCount;
+                int cost;
+                //7.7
+
+                public Car (int wheelCount, int doorsCount) {
+                    super(wheelCount);
+                    this.doorsCount = doorsCount;
+                } // 7.7 Конструктор Car
+
+                @Override
+                protected void printInfo() {
+                    if (cost != 0)
+                        System.out.println("Транспортное средство: Машина - Количество дверей: " + doorsCount + " - " +
+                                "Количество колес: " + wheelCount + " - Цена: " + cost);
+                    else System.out.println("Транспортное средство: Машина - Количество дверей: " + doorsCount + " - " +
+                            "Количество колес: " + wheelCount);
+                }  //7.8 Переопределение Метода
+
+                public void setCost(int cost) {
+                    this.cost = cost;
+                }
+                @Override
+                public int getCost() {
+                    return cost;
+                } //7.13 Переопределение Метода интерфейса
+            }//Car
+
+            // task (7.9 - 7.11) "Класс Motorcycle (наследник класса Vehicle)"
+            class Motorcycle extends Vehicle {
+                private final int maxSpeed; // 7.10
+
+                public Motorcycle (int wheelCount, int maxSpeed){
+                    super(wheelCount);
+                    this.maxSpeed = maxSpeed;
+                } //7.10 Конструктор Motorcycle
+
+                @Override
+                protected void printInfo() {
+                    System.out.println("Транспортное средство: Мотоцикл - Количество колес: "+ wheelCount + " - " +
+                            "Максимальная скорость: " + maxSpeed + " км/ч");
+                } //7.11 Переопределение Метода
+            } //Motorcycle
+
+            //Демонстрация
+
+            Car coupeCar = new Car(4,2);
+            Car sedanCar = new Car(4,4);
+            Motorcycle motoWithSidecar = new Motorcycle(3,170);
+            Motorcycle  motoOrdinary = new Motorcycle(2,250);
+
+            coupeCar.printInfo();
+            coupeCar.setCost(4242);
+            System.out.println("Цена: " + coupeCar.getCost());
+            coupeCar.printInfo();
+
+            sedanCar.setCost(42);
+            System.out.println("Цена: " + sedanCar.getCost());
+            sedanCar.printInfo();
+
+            motoOrdinary.printInfo();
+            motoWithSidecar.printInfo();
     }
 }
